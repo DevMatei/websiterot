@@ -6,4 +6,5 @@ project made for [Hackclub's Hacklet](https://hacklet.hackclub.com/)
 
 No AI was used in the making of this project.
 
-### currently it dosent work at all, still building it
+I am trying to make the code well documented and readable hence the "spam" of comments in it
+
