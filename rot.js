@@ -56,7 +56,7 @@
     function glitch(el, p) { // glitch effect
         const d = p*6;
         el.style.textShadow = `${d}px 0 red, ${-d}px 0 cyan`;
-        el.style.transform = `skew(${n(-1,1)*e*20}deg)`;
+        el.style.transform = `skew(${rand(-1,1)*p*20}deg)`;
     }
     function curse(el, p) { //makes images look weird
         const img = pick(document.images);
