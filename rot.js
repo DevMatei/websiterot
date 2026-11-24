@@ -29,7 +29,7 @@
     // (p is how the dead the page is)
 
     function typos(el, p) { //this will mess up some letters
-        const node = pick(texts());
+        const node = pick(words);
         if (!node) return;
         const letters = [...node.data];
 
@@ -108,6 +108,7 @@
     addEventListener('keydown', e => {if (e.key == 'Escape') location.reload(); });
 
     let everything = stuff();
+    let words = texts();
     const loop = setInterval(()=> {
         rot = Math.min(100, rot + 100 / (lifetime * 5));
         const p = rot / 100
@@ -123,7 +124,7 @@
         health.textContent = `page health: ${Math.ceil(100- rot)}%`;
         health.style.color = rot < 50 ? '#760' : rot < 80 ? '#fb0' : '#f33';
 
-        if (Math.random() < 0.05) everything = stuff();
+        if (Math.random() < 0.03) { everything = stuff(); words = texts(); }
 
         if (rot >= 100) die();
     }, 200);
