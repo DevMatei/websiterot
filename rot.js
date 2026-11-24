@@ -19,7 +19,8 @@
         const found= [];
         while (walker.nextNode()) {
             const node = walker.currentNode;
-            if (node.data.trim() && node.parentNode.id != 'rot-health') found.push(node);
+            const tag = node.parentNode.nodeName;
+            if (node.data.trim() && !['SCRIPT', 'STYLE', 'NOSCRIPT', 'TEXTAREA'].includes(tag)) found.push(node);
         }
         return found;
     }
