@@ -46,7 +46,7 @@
         el.style.rotate = `${rand(-1,1)*p*25}deg`;
     }
     function drain(el, p) { //drains color and other stuff
-        el.style.filter = `grayscale(${p}) blur(${p*2}) contrast(${1 + p}) sepia(${p/2})`;
+        el.style.filter = `grayscale(${p}) blur(${p*1.5}px) contrast(${1 + p}) sepia(${p/2})`;
     }
     function crack(el, p) { // breaks off a chunk from it
         const x = rand(20, 80), y = rand(20, 80);
