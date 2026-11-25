@@ -6,6 +6,7 @@
     const lifetime = 90; // this is like the lifetime of the page until its fully dead
     const junk = "▓▒░█▀▄■□#%&@?!¿§^=";
     const screen = innerWidth * innerHeight;
+    const gone = new WeakSet(); //stuff that has already fallen down shouldt be touched again
 
     const rand = (min, max) => min + Math.random() * (max - min);
     const pick = list => list[Math.floor(Math.random()*list.length)];
@@ -79,6 +80,7 @@
         setTimeout(() => drop.remove(), 2100);
     }
     function fall(el, p) { // jst let go of it completely
+        gone.add(el);
         el.style.transition = `translate 2.5s ease-in, rotate 2.5s ease-in`;
         el.style.translate = `${rand(-50, 50)}px ${innerHeight * 1.5}px`;
         el.style.rotate = `${rand(-120, 120)}deg`;
@@ -115,10 +117,11 @@
         const p = rot / 100
         const unlocked = attacks.filter(a => rot >= a.at);
         for (let i = 0; i < 0 + rot / 4; i++) {
-            pick(unlocked).hurt(pick(everything), p);
+            const el = pick (everything);
+            if (el && !gone.has(el)) pick (unlocked).hurt(el, p);
         }
         const underMouse = document.elementFromPoint(mouseX, mouseY);
-        if (underMouse && underMouse.offsetWidth * underMouse.offsetHeight < screen * 0.3)
+        if (underMouse && !gone.has(underMouse) && underMouse.offsetWidth * underMouse.offsetHeight < screen * 0.3)
             pick(unlocked).hurt(underMouse, p);
 
         if (rot > 60) document.body.style.rotate = `${Math.sin(Date.now() / 300) * (rot - 60) / 10}deg`
