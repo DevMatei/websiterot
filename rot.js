@@ -4,7 +4,7 @@
 
     let rot = 0; // 0 = page is fine, 100 =page is dead :(
     const lifetime = 90; // this is like the lifetime of the page until its fully dead
-    const junk = "▓▒░█▀▄■□#%&@?!¿§^=";
+    const junk = "▓▒░█▀▄■□#&@?!¿§^=";
     const screen = innerWidth * innerHeight;
     const gone = new WeakSet(); //stuff that has already fallen down shouldt be touched again
 
