@@ -5,12 +5,13 @@
     let rot = 0; // 0 = page is fine, 100 =page is dead :(
     const lifetime = 90; // this is like the lifetime of the page until its fully dead
     const junk = "▓▒░█▀▄■□#%&@?!¿§^=";
+    const screen = innerWidth * innerHeight;
 
     const rand = (min, max) => min + Math.random() * (max - min);
     const pick = list => list[Math.floor(Math.random()*list.length)];
 
     const stuff = () => [...document.body.querySelectorAll('*')]
-        .filter(el => el.offsetWidth && el.id !== "rot-health");
+        .filter(el => el.offsetWidth && el.offsetWidth * el.offsetHeight < screen * 0.3);
 
 
     // this should hopefully extract all the bits on the page 
@@ -117,7 +118,8 @@
             pick(unlocked).hurt(pick(everything), p);
         }
         const underMouse = document.elementFromPoint(mouseX, mouseY);
-        if (underMouse && underMouse != document.body) pick(unlocked).hurt(underMouse, p);
+        if (underMouse && underMouse.offsetWidth * underMouse.offsetHeight < screen * 0.3)
+            pick(unlocked).hurt(underMouse, p);
 
         if (rot > 60) document.body.style.rotate = `${Math.sin(Date.now() / 300) * (rot - 60) / 10}deg`
 
